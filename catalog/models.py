@@ -1,3 +1,4 @@
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 from datetime import datetime
 from django.core.exceptions import ValidationError
@@ -19,7 +20,7 @@ class Province(models.Model):
     name = models.CharField(max_length=255)
 
 
-class Supplier(models.Model):
+class Supplier(AbstractUser):
     name = models.CharField(max_length=255)
     website = models.URLField(blank=True, null=True)
 

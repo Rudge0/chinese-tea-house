@@ -116,3 +116,19 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = "static/"
+
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
+
+AUTH_USER_MODEL = "catalog.Supplier"
+
+LOGIN_URL = "login"
+LOGIN_REDIRECT_URL = "/catalog/"
+
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
+CRISPY_TEMPLATE_PACK = "bootstrap4"

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}
+  <title>Home page</title>
+{% endblock %}
+
+{% block content %}
+  <h1>Home</h1>
+  <p>Welcome to the greatest library</p>
+  <h3>In out tea house you will see:</h3>
+  <ul>
+    <li>Teas: {{ num_teas }}</li>
+    <li>Suppliers: {{ num_supplier }}</li>
+    <li>Tea categories: {{ num_tea_category }}</li>
+    <li>Provinces: {{ num_provinces }}</li>
+  </ul>
+  <p>You have visited this page {{ num_visits }} time{{ num_visits|pluralize }}</p>
+{% endblock %}
