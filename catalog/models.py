@@ -21,7 +21,6 @@ class Province(models.Model):
 
 
 class Supplier(AbstractUser):
-    name = models.CharField(max_length=255)
     website = models.URLField(blank=True, null=True)
 
 
