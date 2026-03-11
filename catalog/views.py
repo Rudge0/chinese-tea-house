@@ -1,5 +1,7 @@
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
+from django.urls import reverse_lazy
+from django.views import generic
 
 from catalog.models import (
     Tea,
@@ -28,5 +30,27 @@ def index(request: HttpRequest) -> HttpResponse:
     }
 
     return render(request, "catalog/index.html", context=context)
+
+
+class TeaListView(generic.ListView):
+    model = Tea
+    paginate_by = 10
+
+
+class TeaDetailView(generic.DetailView):
+    model = Tea
+
+
+class TeaCreateView(generic.CreateView):
+    model = Tea
+    fields = "__all__"
+    success_url = reverse_lazy("catalog:tea-list")
+
+class TeaUpdateView(generic.UpdateView):
+    model = Tea
+
+
+class TeaDeleteView(generic.DeleteView):
+    model = Tea
 
 
