@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
 
+from catalog.froms import TeaSearchForm
 from catalog.models import (
     Tea,
     Supplier,
@@ -36,8 +37,24 @@ class TeaListView(generic.ListView):
     model = Tea
     paginate_by = 10
 
+    def get_context_data(
+        self, *, object_list = ..., **kwargs
+    ):
+        context = super(TeaListView, self).get_context_data(**kwargs)
+        print("CONTEXT:", context)
+        name = self.request.GET.get("name", "")
+        print("NAME:", name)
+        context["name"] = name
+        context["search_form"] = TeaSearchForm(
+            initial={"name": name}
+        )
+        return context
+
     def get_queryset(self):
         queryset = Tea.objects.select_related("category", "province")
+        form = TeaSearchForm(self.request.GET)
+        if form.is_valid():
+           return queryset.filter(name__icontains=form.cleaned_data["name"])
         return queryset
 
 
