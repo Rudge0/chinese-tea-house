@@ -35,7 +35,7 @@ def index(request: HttpRequest) -> HttpResponse:
 
 class TeaListView(generic.ListView):
     model = Tea
-    paginate_by = 10
+    paginate_by = 2
 
     def get_context_data(
         self, *, object_list = ..., **kwargs
