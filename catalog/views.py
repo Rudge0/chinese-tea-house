@@ -36,15 +36,21 @@ class TeaListView(generic.ListView):
     model = Tea
     paginate_by = 10
 
+    def get_queryset(self):
+        queryset = Tea.objects.select_related("category", "province")
+        return queryset
+
 
 class TeaDetailView(generic.DetailView):
     model = Tea
+    queryset = Tea.objects.select_related("category", "province").prefetch_related("supplier")
 
 
 class TeaCreateView(generic.CreateView):
     model = Tea
     fields = "__all__"
     success_url = reverse_lazy("catalog:tea-list")
+
 
 class TeaUpdateView(generic.UpdateView):
     model = Tea

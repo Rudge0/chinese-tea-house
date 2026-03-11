@@ -5,7 +5,7 @@
 {% block content %}
   <h1>
     Tea catalog
-    <a href="{% url 'catalog:tea-create' %}" class="btn btn-primary link-to-page">Create</a>
+    <a href="{% url 'catalog:tea-create' %}" class="btn btn-primary link-to-page">Create new tea</a>
   </h1>
   <form action="" method="get" class="form-inline">
     {{ search_form|crispy }}
@@ -17,7 +17,8 @@
         <th>ID</th>
         <th>Title</th>
         <th>Price</th>
-        <th>Format</th>
+        <th>Category</th>
+        <th>Harvest year</th>
       </tr>
       {% for tea in tea_list %}
         <tr>
@@ -44,7 +45,7 @@
     </table>
   {% else %}
     <p>
-      There is no books
+      There is no teas
     </p>
   {% endif %}
 {% endblock %}
