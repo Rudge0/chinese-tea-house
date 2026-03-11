@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+
+{% load crispy_forms_tags %}
+{% block content %}
+  <h1>
+    Suppliers
+    <a href="{% url 'catalog:supplier-create' %}" class="btn btn-primary link-to-page">Create</a>
+  </h1>
+  <form action="" method="get" class="form-inline">
+    {{ search_form|crispy }}
+    <input type="submit" value="Search" class="btn btn-secondary">
+  </form>
+  {% if supplier_list %}
+    <table class="table">
+      <tr>
+        <th>Id</th>
+        <th>Full name</th>
+        <th>Username</th>
+      </tr>
+      {% for supplier in supplier_list %}
+        <tr>
+          <th>
+            <a href="{{ supplier.get_absolute_url }}">{{ supplier.id }}</a>
+          </th>
+          <th>
+            {{ supplier.first_name }} {{ supplier.last_name }}
+          </th>
+          <th>
+            {{ supplier.username }}
+          </th>
+        </tr>
+      {% endfor %}
+    </table>
+  {% else %}
+    <p>
+      There are no suppliers
+    </p>
+  {% endif %}
+{% endblock %}

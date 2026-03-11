@@ -1,17 +1,17 @@
 {% extends "base.html" %}
 
-
-{% load crispy_forms_tags %}
 {% block content %}
   <h1>
-    Tea catalog
-    <a href="{% url 'catalog:tea-create' %}" class="btn btn-primary link-to-page">Create new tea</a>
+    {{ supplier }}
   </h1>
-  <form action="" method="get" class="form-inline">
-    {{ search_form|crispy }}
-    <input type="submit" value="Search" class="btn btn-secondary">
-  </form>
-  {% if tea_list %}
+  <p>
+    Website: {{ supplier.supplier }}
+  </p>
+  {% if supplier.teas %}
+    <h3>
+      Supplier’s teas:
+      <a href="{% url 'catalog:tea-create' %}" class="btn btn-success link-to-page" >Create new tea</a>
+    </h3>
     <table class="table">
       <tr>
         <th>Name</th>
@@ -19,7 +19,7 @@
         <th>Category</th>
         <th>Harvest year</th>
       </tr>
-      {% for tea in tea_list %}
+      {% for tea in supplier.teas.all %}
         <tr>
           <th>
             <a href="{{ tea.get_absolute_url }}">{{ tea.name }}</a>
@@ -40,8 +40,13 @@
       {% endfor %}
     </table>
   {% else %}
-    <p>
-      There are no teas
-    </p>
+    <p>This supplier has no teas</p>
   {% endif %}
+  <a class="btn btn-secondary" href="{% url 'catalog:supplier-update' pk=supplier.id %}">
+    Update supplier
+  </a>
+  <a class="btn btn-danger" href="{% url 'catalog:supplier-delete' pk=supplier.id %}">
+    Delete supplier
+  </a>
+
 {% endblock %}

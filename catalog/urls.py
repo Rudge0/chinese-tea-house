@@ -9,17 +9,33 @@ from catalog.views import ( \
     TeaDeleteView,
 
 
+    SupplierListView,
+    SupplierDetailView,
+    SupplierCreateView,
+    SupplierUpdateView,
+    SupplierDeleteView,
 
 )
 
 urlpatterns = [
     path("", index, name="index"),
 
+####### Tea
     path("teas/", TeaListView.as_view(), name="tea-list"),
     path("teas/create/", TeaCreateView.as_view(), name="tea-create"),
     path("teas/<int:pk>/", TeaDetailView.as_view(), name="tea-detail"),
     path("teas/<int:pk>/update/", TeaUpdateView.as_view(), name="tea-update"),
     path("teas/<int:pk>/delete", TeaDeleteView.as_view(), name="tea-delete"),
+####### Tea
+
+####### Supplier
+    path("suppliers/", SupplierListView.as_view(), name="supplier-list"),
+    path("suppliers/create/", SupplierCreateView.as_view(), name="supplier-create"),
+    path("suppliers/<int:pk>/", SupplierDetailView.as_view(), name="supplier-detail"),
+    path("suppliers/<int:pk>/update/", SupplierUpdateView.as_view(), name="supplier-update"),
+    path("suppliers/<int:pk>/delete", SupplierDeleteView.as_view(), name="supplier-delete"),
+####### Supplier
+
 ]
 
 

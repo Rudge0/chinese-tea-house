@@ -1,9 +1,10 @@
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
+from django.template.context_processors import request
 from django.urls import reverse_lazy
 from django.views import generic
 
-from catalog.froms import TeaSearchForm
+from catalog.froms import TeaSearchForm, SupplierSearchForm, TeaForm
 from catalog.models import (
     Tea,
     Supplier,
@@ -35,15 +36,13 @@ def index(request: HttpRequest) -> HttpResponse:
 
 class TeaListView(generic.ListView):
     model = Tea
-    paginate_by = 2
+    paginate_by = 10
 
     def get_context_data(
         self, *, object_list = ..., **kwargs
     ):
         context = super(TeaListView, self).get_context_data(**kwargs)
-        print("CONTEXT:", context)
         name = self.request.GET.get("name", "")
-        print("NAME:", name)
         context["name"] = name
         context["search_form"] = TeaSearchForm(
             initial={"name": name}
@@ -65,8 +64,7 @@ class TeaDetailView(generic.DetailView):
 
 class TeaCreateView(generic.CreateView):
     model = Tea
-    fields = "__all__"
-    success_url = reverse_lazy("catalog:tea-list")
+    form_class = TeaForm
 
 
 class TeaUpdateView(generic.UpdateView):
@@ -76,3 +74,45 @@ class TeaUpdateView(generic.UpdateView):
 class TeaDeleteView(generic.DeleteView):
     model = Tea
     success_url = reverse_lazy("catalog:tea-list")
+
+
+class SupplierListView(generic.ListView):
+    model = Supplier
+    paginate_by = 10
+
+    def get_context_data(
+        self, *, object_list = ..., **kwargs
+    ):
+        context = super(SupplierListView, self).get_context_data(**kwargs)
+        last_name = self.request.GET.get("last_name", "")
+        context["last_name"] = last_name
+        context["search_form"] = SupplierSearchForm(
+            initial={"last_name": last_name}
+        )
+        return context
+
+    def get_queryset(self):
+        queryset = Supplier.objects.all()
+        form = SupplierSearchForm(self.request.GET)
+        if form.is_valid():
+           return queryset.filter(last_name__icontains=form.cleaned_data["last_name"])
+        return queryset
+
+
+class SupplierDetailView(generic.DetailView):
+    model = Supplier
+
+
+class SupplierCreateView(generic.CreateView):
+    model = Supplier
+    fields = "__all__"
+    success_url = reverse_lazy("catalog:supplier-list")
+
+
+class SupplierUpdateView(generic.UpdateView):
+    model = Supplier
+    fields = "__all__"
+
+class SupplierDeleteView(generic.DeleteView):
+    model = Supplier
+    success_url = reverse_lazy("catalog:supplier-list")
