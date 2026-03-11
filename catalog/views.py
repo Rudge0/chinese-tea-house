@@ -48,9 +48,8 @@ class TeaCreateView(generic.CreateView):
 
 class TeaUpdateView(generic.UpdateView):
     model = Tea
-
+    fields = "__all__"
 
 class TeaDeleteView(generic.DeleteView):
     model = Tea
-
-
+    success_url = reverse_lazy("catalog:tea-list")

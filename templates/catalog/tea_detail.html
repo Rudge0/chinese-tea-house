@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>
+    {{ tea }}
+  </h1>
+  <p>
+    Price: {{ tea.price }}
+  </p>
+  <p>
+    Harvest year: {{ tea.harvest_year }}
+  </p>
+  <p>
+    Category: {{ tea.category }}
+  </p>
+  <p>
+    Province: {{ tea.province }}
+  </p>
+  <p>
+    Supplier: {{ tea.supplier }}
+  </p>
+  <a class="btn btn-secondary" href="{% url 'catalog:tea-update' pk=tea.id%}">
+  Update
+  </a>
+  <a class="btn btn-danger" href="{% url 'catalog:tea-delete' pk=tea.id%}">
+  Delete
+  </a>
+
+{% endblock %}

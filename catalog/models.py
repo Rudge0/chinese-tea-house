@@ -3,6 +3,7 @@ from django.db import models
 from datetime import datetime
 from django.core.exceptions import ValidationError
 from django.core.validators import MinValueValidator
+from django.urls import reverse
 
 
 def max_current_year(value):
@@ -15,22 +16,30 @@ class TeaCategory(models.Model):
     name = models.CharField(max_length=255)
     description = models.CharField(max_length=1000, blank=True, null=True)
 
+    def __str__(self):
+        return self.name
 
 class Province(models.Model):
     name = models.CharField(max_length=255)
 
+    def __str__(self):
+        return self.name
+
 
 class Supplier(AbstractUser):
     website = models.URLField(blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.first_name}, {self.last_name}"
 
 
 class Tea(models.Model):
     name = models.CharField(max_length=255)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     harvest_year = models.IntegerField(validators=[
-            MinValueValidator(0),
-            max_current_year
-        ])
+        MinValueValidator(0),
+        max_current_year
+    ])
 
     category = models.ForeignKey(
         TeaCategory,
@@ -38,10 +47,16 @@ class Tea(models.Model):
         related_name="teas"
     )
 
-    region = models.ForeignKey(
+    province = models.ForeignKey(
         Province,
         on_delete=models.CASCADE,
         related_name="teas"
     )
 
     supplier = models.ManyToManyField(Supplier, related_name="teas")
+
+    def __str__(self):
+        return f"{self.name} {self.category}"
+
+    def get_absolute_url(self):
+        return reverse("catalog:tea-detail", args=[str(self.id)])

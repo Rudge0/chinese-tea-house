@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+
+{% load crispy_forms_tags %}
+{% block content %}
+  <h1>
+    Tea catalog
+    <a href="{% url 'catalog:tea-create' %}" class="btn btn-primary link-to-page">Create</a>
+  </h1>
+  <form action="" method="get" class="form-inline">
+    {{ search_form|crispy }}
+    <input type="submit" value="Search" class="btn btn-secondary">
+  </form>
+  {% if tea_list %}
+    <table class="table">
+      <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Price</th>
+        <th>Format</th>
+      </tr>
+      {% for tea in tea_list %}
+        <tr>
+          <th>
+            <a href="{{ tea.get_absolute_url }}">{{ tea.id }}</a>
+          </th>
+          <th>
+            {{ tea.name }}
+          </th>
+          <th>
+            {{ tea.price }}
+          </th>
+          <th>
+            {{ tea.category }}
+          </th>
+          <th>
+            {{ tea.harvest_year }}
+          </th>
+          <th>
+            {{ tea.region }}
+          </th>
+        </tr>
+      {% endfor %}
+    </table>
+  {% else %}
+    <p>
+      There is no books
+    </p>
+  {% endif %}
+{% endblock %}
