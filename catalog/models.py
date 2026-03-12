@@ -30,7 +30,7 @@ class Supplier(AbstractUser):
     website = models.URLField(blank=True, null=True)
 
     def __str__(self):
-        return f"{self.first_name}, {self.last_name}"
+        return f"{self.first_name} {self.last_name}"
 
     def get_absolute_url(self):
         return reverse("catalog:supplier-detail", args=[str(self.id)])

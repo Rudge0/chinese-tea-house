@@ -17,13 +17,20 @@
     Province: {{ tea.province }}
   </p>
   <p>
-    Supplier: {{ tea.supplier }}
+    Supplier:
+  <ul>
+    {% for supplier in tea.supplier.all %}
+      <li>
+        <a href="{{ supplier.get_absolute_url }}">{{ supplier }}</a>
+      </li>
+    {% endfor %}
+  </ul>
   </p>
-  <a class="btn btn-secondary" href="{% url 'catalog:tea-update' pk=tea.id%}">
-  Update
+  <a class="btn btn-secondary" href="{% url 'catalog:tea-update' pk=tea.id %}">
+    Update
   </a>
-  <a class="btn btn-danger" href="{% url 'catalog:tea-delete' pk=tea.id%}">
-  Delete
+  <a class="btn btn-danger" href="{% url 'catalog:tea-delete' pk=tea.id %}">
+    Delete
   </a>
 
 {% endblock %}

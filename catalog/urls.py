@@ -15,6 +15,12 @@ from catalog.views import ( \
     SupplierUpdateView,
     SupplierDeleteView,
 
+    ProvinceListView,
+    ProvinceDetailView,
+    ProvinceCreateView,
+    ProvinceUpdateView,
+    ProvinceDeleteView,
+
 )
 
 urlpatterns = [
@@ -35,6 +41,13 @@ urlpatterns = [
     path("suppliers/<int:pk>/update/", SupplierUpdateView.as_view(), name="supplier-update"),
     path("suppliers/<int:pk>/delete", SupplierDeleteView.as_view(), name="supplier-delete"),
 ####### Supplier
+####### Province
+    path("provinces/", ProvinceListView.as_view(), name="province-list"),
+    path("provinces/create/", ProvinceCreateView.as_view(), name="province-create"),
+    path("provinces/<int:pk>/", ProvinceDetailView.as_view(), name="province-detail"),
+    path("provinces/<int:pk>/update/", ProvinceUpdateView.as_view(), name="province-update"),
+    path("provinces/<int:pk>/delete", ProvinceDeleteView.as_view(), name="province-delete"),
+####### Province
 
 ]
 

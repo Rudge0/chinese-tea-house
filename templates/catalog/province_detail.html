@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>
+    {{ province }}
+  </h1>
+  {% if province.teas %}
+    <h3>
+      Teas from {{ province }}:
+      <a href="{% url 'catalog:tea-create' %}" class="btn btn-success link-to-page" >Create new tea</a>
+    </h3>
+    <table class="table">
+      <tr>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Category</th>
+        <th>Harvest year</th>
+      </tr>
+      {% for tea in province.teas.all %}
+        <tr>
+          <th>
+            <a href="{{ tea.get_absolute_url }}">{{ tea.name }}</a>
+          </th>
+          <th>
+            {{ tea.price }}
+          </th>
+          <th>
+            {{ tea.category }}
+          </th>
+          <th>
+            {{ tea.harvest_year }}
+          </th>
+          <th>
+            {{ tea.region }}
+          </th>
+        </tr>
+      {% endfor %}
+    </table>
+  {% else %}
+    <p>This province has no teas</p>
+  {% endif %}
+  <a class="btn btn-secondary" href="{% url 'catalog:province-update' pk=province.id %}">
+    Update province
+  </a>
+  <a class="btn btn-danger" href="{% url 'catalog:province-delete' pk=province.id %}">
+    Delete province
+  </a>
+
+{% endblock %}

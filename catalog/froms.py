@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
 
-from catalog.models import Tea, Supplier
+from catalog.models import Tea, Supplier, Province, TeaCategory
 
 
 class TeaSearchForm(forms.Form):
@@ -43,7 +43,14 @@ class SupplierSearchForm(forms.Form):
         )
     )
 
+
 class SupplierCreationForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = Supplier
         fields = UserCreationForm.Meta.fields + ("first_name", "last_name", "website",)
+
+
+class ProvinceForm(forms.ModelForm):
+    class Meta:
+        model = Province
+        fields = "__all__"

@@ -10,6 +10,7 @@ from catalog.froms import (
     SupplierSearchForm,
     TeaForm,
     SupplierCreationForm,
+    ProvinceForm,
 )
 from catalog.models import (
     Tea,
@@ -21,7 +22,6 @@ from catalog.models import (
 
 @login_required
 def index(request: HttpRequest) -> HttpResponse:
-
     num_teas = Tea.objects.count()
     num_supplier = Supplier.objects.count()
     num_provinces = Province.objects.count()
@@ -46,7 +46,7 @@ class TeaListView(LoginRequiredMixin, generic.ListView):
     paginate_by = 10
 
     def get_context_data(
-        self, *, object_list = ..., **kwargs
+            self, *, object_list=..., **kwargs
     ):
         context = super(TeaListView, self).get_context_data(**kwargs)
         name = self.request.GET.get("name", "")
@@ -60,7 +60,7 @@ class TeaListView(LoginRequiredMixin, generic.ListView):
         queryset = Tea.objects.select_related("category", "province")
         form = TeaSearchForm(self.request.GET)
         if form.is_valid():
-           return queryset.filter(name__icontains=form.cleaned_data["name"])
+            return queryset.filter(name__icontains=form.cleaned_data["name"])
         return queryset
 
 
@@ -78,6 +78,7 @@ class TeaUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Tea
     fields = "__all__"
 
+
 class TeaDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Tea
     success_url = reverse_lazy("catalog:tea-list")
@@ -88,7 +89,7 @@ class SupplierListView(LoginRequiredMixin, generic.ListView):
     paginate_by = 10
 
     def get_context_data(
-        self, *, object_list = ..., **kwargs
+            self, *, object_list=..., **kwargs
     ):
         context = super(SupplierListView, self).get_context_data(**kwargs)
         last_name = self.request.GET.get("last_name", "")
@@ -102,7 +103,7 @@ class SupplierListView(LoginRequiredMixin, generic.ListView):
         queryset = Supplier.objects.all()
         form = SupplierSearchForm(self.request.GET)
         if form.is_valid():
-           return queryset.filter(last_name__icontains=form.cleaned_data["last_name"])
+            return queryset.filter(last_name__icontains=form.cleaned_data["last_name"])
         return queryset
 
 
@@ -120,6 +121,32 @@ class SupplierUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Supplier
     fields = "__all__"
 
+
 class SupplierDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Supplier
     success_url = reverse_lazy("catalog:supplier-list")
+
+
+class ProvinceListView(LoginRequiredMixin, generic.ListView):
+    model = Province
+    paginate_by = 10
+
+
+class ProvinceDetailView(LoginRequiredMixin, generic.DetailView):
+    model = Province
+
+
+class ProvinceCreateView(LoginRequiredMixin, generic.CreateView):
+    model = Province
+    form_class = ProvinceForm
+    success_url = reverse_lazy("catalog:province-list")
+
+
+class ProvinceUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = Province
+    fields = "__all__"
+
+
+class ProvinceDeleteView(LoginRequiredMixin, generic.DeleteView):
+    model = Province
+    success_url = reverse_lazy("catalog:province-list")

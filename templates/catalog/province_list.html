@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+
+{% load crispy_forms_tags %}
+{% block content %}
+  <h1>
+    Provinces:
+    <a href="{% url 'catalog:province-create' %}" class="btn btn-primary link-to-page">Create new province</a>
+  </h1>
+  {% if province_list %}
+    <ul>
+    {% for province in province_list %}
+      <li>
+        <a href="{% url 'catalog:province-detail' pk=province.id %}">
+          {{ province }}
+        </a>
+      </li>
+    {% endfor %}
+    </ul>
+  {% else %}
+    <p>
+      There are no provinces
+    </p>
+  {% endif %}
+{% endblock %}
