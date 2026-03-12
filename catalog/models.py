@@ -19,11 +19,18 @@ class TeaCategory(models.Model):
     def __str__(self):
         return self.name
 
+    def get_absolute_url(self):
+        return reverse("catalog:tea-category-detail", args=[str(self.id)])
+
+
 class Province(models.Model):
     name = models.CharField(max_length=255)
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse("catalog:province-detail", args=[str(self.id)])
 
 
 class Supplier(AbstractUser):

@@ -1,12 +1,14 @@
 <ul class="sidebar-nav list-group">
   {% if user.is_authenticated %}
     <li class="list-group-item">User: {{ user.first_name }} {{ user.last_name }}</li>
-    <li>
-      <form action="{% url 'logout' %}" method="post">
-        {% csrf_token %}
-        <button type="submit" class="btn btn-primary" style="margin-top: 10px">Log out</button>
-      </form>
+    <li class="list-group-item">
+      <a href="{% url 'catalog:supplier-create' %}">Create new User</a>
     </li>
+    <form action="{% url 'logout' %}" method="post">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-primary" style="margin-top: 10px">Log out</button>
+    </form>
+
     <br>
   {% else %}
     <li class="list-group-item">
@@ -25,5 +27,8 @@
   </li>
   <li class="list-group-item">
     <a href="{% url 'catalog:province-list' %}">Provinces</a>
+  </li>
+  <li class="list-group-item">
+    <a href="{% url 'catalog:tea-category-list' %}">Tea categories</a>
   </li>
 </ul>

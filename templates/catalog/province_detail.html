@@ -4,10 +4,18 @@
   <h1>
     {{ province }}
   </h1>
+  <hr>
+  <a class="btn btn-secondary" href="{% url 'catalog:province-update' pk=province.id %}">
+    Update province
+  </a>
+  <a class="btn btn-danger" href="{% url 'catalog:province-delete' pk=province.id %}">
+    Delete province
+  </a>
+  <hr>
   {% if province.teas %}
     <h3>
       Teas from {{ province }}:
-      <a href="{% url 'catalog:tea-create' %}" class="btn btn-success link-to-page" >Create new tea</a>
+      <a href="{% url 'catalog:tea-create' %}" class="btn btn-success link-to-page">Create new tea</a>
     </h3>
     <table class="table">
       <tr>
@@ -39,11 +47,4 @@
   {% else %}
     <p>This province has no teas</p>
   {% endif %}
-  <a class="btn btn-secondary" href="{% url 'catalog:province-update' pk=province.id %}">
-    Update province
-  </a>
-  <a class="btn btn-danger" href="{% url 'catalog:province-delete' pk=province.id %}">
-    Delete province
-  </a>
-
 {% endblock %}
