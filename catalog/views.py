@@ -1,10 +1,16 @@
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
-from django.template.context_processors import request
 from django.urls import reverse_lazy
 from django.views import generic
 
-from catalog.froms import TeaSearchForm, SupplierSearchForm, TeaForm
+from catalog.froms import (
+    TeaSearchForm,
+    SupplierSearchForm,
+    TeaForm,
+    SupplierCreationForm,
+)
 from catalog.models import (
     Tea,
     Supplier,
@@ -13,6 +19,7 @@ from catalog.models import (
 )
 
 
+@login_required
 def index(request: HttpRequest) -> HttpResponse:
 
     num_teas = Tea.objects.count()
@@ -34,7 +41,7 @@ def index(request: HttpRequest) -> HttpResponse:
     return render(request, "catalog/index.html", context=context)
 
 
-class TeaListView(generic.ListView):
+class TeaListView(LoginRequiredMixin, generic.ListView):
     model = Tea
     paginate_by = 10
 
@@ -57,26 +64,26 @@ class TeaListView(generic.ListView):
         return queryset
 
 
-class TeaDetailView(generic.DetailView):
+class TeaDetailView(LoginRequiredMixin, generic.DetailView):
     model = Tea
     queryset = Tea.objects.select_related("category", "province").prefetch_related("supplier")
 
 
-class TeaCreateView(generic.CreateView):
+class TeaCreateView(LoginRequiredMixin, generic.CreateView):
     model = Tea
     form_class = TeaForm
 
 
-class TeaUpdateView(generic.UpdateView):
+class TeaUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Tea
     fields = "__all__"
 
-class TeaDeleteView(generic.DeleteView):
+class TeaDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Tea
     success_url = reverse_lazy("catalog:tea-list")
 
 
-class SupplierListView(generic.ListView):
+class SupplierListView(LoginRequiredMixin, generic.ListView):
     model = Supplier
     paginate_by = 10
 
@@ -99,20 +106,20 @@ class SupplierListView(generic.ListView):
         return queryset
 
 
-class SupplierDetailView(generic.DetailView):
+class SupplierDetailView(LoginRequiredMixin, generic.DetailView):
     model = Supplier
 
 
-class SupplierCreateView(generic.CreateView):
+class SupplierCreateView(LoginRequiredMixin, generic.CreateView):
     model = Supplier
-    fields = "__all__"
+    form_class = SupplierCreationForm
     success_url = reverse_lazy("catalog:supplier-list")
 
 
-class SupplierUpdateView(generic.UpdateView):
+class SupplierUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Supplier
     fields = "__all__"
 
-class SupplierDeleteView(generic.DeleteView):
+class SupplierDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Supplier
     success_url = reverse_lazy("catalog:supplier-list")

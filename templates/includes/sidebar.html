@@ -1,4 +1,19 @@
 <ul class="sidebar-nav list-group">
+  {% if user.is_authenticated %}
+    <li class="list-group-item">User: {{ user.first_name }} {{ user.last_name }}</li>
+    <li>
+      <form action="{% url 'logout' %}" method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-primary" style="margin-top: 10px">Log out</button>
+      </form>
+    </li>
+    <br>
+  {% else %}
+    <li class="list-group-item">
+      <a href="{% url 'login' %}">Log in</a>
+    </li>
+    <br>
+  {% endif %}
   <li class="list-group-item">
     <a href="{% url 'catalog:index' %}">Home</a>
   </li>

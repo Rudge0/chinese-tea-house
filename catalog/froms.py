@@ -1,7 +1,8 @@
 from django import forms
 from django.contrib.auth import get_user_model
+from django.contrib.auth.forms import UserCreationForm
 
-from catalog.models import Tea
+from catalog.models import Tea, Supplier
 
 
 class TeaSearchForm(forms.Form):
@@ -41,3 +42,8 @@ class SupplierSearchForm(forms.Form):
             }
         )
     )
+
+class SupplierCreationForm(UserCreationForm):
+    class Meta(UserCreationForm.Meta):
+        model = Supplier
+        fields = UserCreationForm.Meta.fields + ("first_name", "last_name", "website",)
