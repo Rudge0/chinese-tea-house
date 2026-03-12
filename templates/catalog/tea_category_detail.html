@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>
+    {{ tea_category }}
+  </h1>
+  <hr>
+  <h4>
+    {{ tea_category.description }}
+  </h4>
+  <hr>
+  <a class="btn btn-secondary" href="{% url 'catalog:tea-category-update' pk=tea_category.id %}">
+    Update tea category
+  </a>
+  <a class="btn btn-danger" href="{% url 'catalog:tea-category-delete' pk=tea_category.id %}">
+    Delete tea category
+  </a>
+  <hr>
+
+  {% if tea_category.teas %}
+    <h3>
+      Teas from {{ tea_category }}:
+      <a href="{% url 'catalog:tea-category-create' %}" class="btn btn-success link-to-page">
+        Create new tea category
+      </a>
+    </h3>
+    <table class="table">
+      <tr>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Category</th>
+        <th>Harvest year</th>
+      </tr>
+      {% for tea in tea_category.teas.all %}
+        <tr>
+          <th>
+            <a href="{{ tea.get_absolute_url }}">{{ tea.name }}</a>
+          </th>
+          <th>
+            {{ tea.price }}
+          </th>
+          <th>
+            {{ tea.category }}
+          </th>
+          <th>
+            {{ tea.harvest_year }}
+          </th>
+          <th>
+            {{ tea.region }}
+          </th>
+        </tr>
+      {% endfor %}
+    </table>
+  {% else %}
+    <p>This tea category has no teas</p>
+  {% endif %}
+
+{% endblock %}

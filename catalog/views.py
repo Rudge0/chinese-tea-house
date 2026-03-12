@@ -11,6 +11,7 @@ from catalog.froms import (
     TeaForm,
     SupplierCreationForm,
     ProvinceForm,
+    TeaCategoryForm
 )
 from catalog.models import (
     Tea,
@@ -76,7 +77,7 @@ class TeaCreateView(LoginRequiredMixin, generic.CreateView):
 
 class TeaUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Tea
-    fields = "__all__"
+    fields = TeaForm
 
 
 class TeaDeleteView(LoginRequiredMixin, generic.DeleteView):
@@ -119,7 +120,7 @@ class SupplierCreateView(LoginRequiredMixin, generic.CreateView):
 
 class SupplierUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Supplier
-    fields = "__all__"
+    form_class = SupplierCreationForm
 
 
 class SupplierDeleteView(LoginRequiredMixin, generic.DeleteView):
@@ -144,9 +145,38 @@ class ProvinceCreateView(LoginRequiredMixin, generic.CreateView):
 
 class ProvinceUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Province
-    fields = "__all__"
+    form_class = ProvinceForm
 
 
 class ProvinceDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Province
     success_url = reverse_lazy("catalog:province-list")
+
+
+class TeaCategoryListView(LoginRequiredMixin, generic.ListView):
+    model = TeaCategory
+    paginate_by = 10
+    template_name = "catalog/tea_category_list.html"
+    context_object_name = "tea_categories_list"
+
+
+class TeaCategoryDetailView(LoginRequiredMixin, generic.DetailView):
+    model = TeaCategory
+    template_name = "catalog/tea_category_detail.html"
+    context_object_name = "tea_category"
+
+class TeaCategoryCreateView(LoginRequiredMixin, generic.CreateView):
+    model = TeaCategory
+    form_class = TeaCategoryForm
+    success_url = reverse_lazy("catalog:province-list")
+    template_name = "catalog/tea_category_form.html"
+
+class TeaCategoryUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = TeaCategory
+    form_class = TeaCategoryForm
+    template_name = "catalog/tea_category_form.html"
+
+class TeaCategoryDeleteView(LoginRequiredMixin, generic.DeleteView):
+    model = TeaCategory
+    success_url = reverse_lazy("catalog:tea-category-list")
+    template_name = "catalog/tea_category_confirm_delete.html"

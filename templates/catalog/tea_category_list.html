@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+
+{% load crispy_forms_tags %}
+{% block content %}
+  <h1>
+    Categories:
+    <a href="{% url 'catalog:province-create' %}" class="btn btn-primary link-to-page">Create new category</a>
+  </h1>
+  {% if tea_categories_list %}
+    <ul>
+    {% for tea_category in tea_categories_list %}
+      <li>
+        <a href="{% url 'catalog:tea-category-detail' pk=tea_category.id %}">
+          {{ tea_category }}
+        </a>
+      </li>
+    {% endfor %}
+    </ul>
+  {% else %}
+    <p>
+      There are no tea categories
+    </p>
+  {% endif %}
+{% endblock %}

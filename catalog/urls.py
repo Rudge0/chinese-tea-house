@@ -21,6 +21,12 @@ from catalog.views import ( \
     ProvinceUpdateView,
     ProvinceDeleteView,
 
+    TeaCategoryListView,
+    TeaCategoryDetailView,
+    TeaCategoryCreateView,
+    TeaCategoryUpdateView,
+    TeaCategoryDeleteView,
+
 )
 
 urlpatterns = [
@@ -41,6 +47,7 @@ urlpatterns = [
     path("suppliers/<int:pk>/update/", SupplierUpdateView.as_view(), name="supplier-update"),
     path("suppliers/<int:pk>/delete", SupplierDeleteView.as_view(), name="supplier-delete"),
 ####### Supplier
+
 ####### Province
     path("provinces/", ProvinceListView.as_view(), name="province-list"),
     path("provinces/create/", ProvinceCreateView.as_view(), name="province-create"),
@@ -49,6 +56,13 @@ urlpatterns = [
     path("provinces/<int:pk>/delete", ProvinceDeleteView.as_view(), name="province-delete"),
 ####### Province
 
+####### Tea Category
+    path("tea-categories/", TeaCategoryListView.as_view(), name="tea-category-list"),
+    path("tea-categories/create/", TeaCategoryCreateView.as_view(), name="tea-category-create"),
+    path("tea-categories/<int:pk>/", TeaCategoryDetailView.as_view(), name="tea-category-detail"),
+    path("tea-categories/<int:pk>/update/", TeaCategoryUpdateView.as_view(), name="tea-category-update"),
+    path("tea-categories/<int:pk>/delete", TeaCategoryDeleteView.as_view(), name="tea-category-delete"),
+####### Tea Category
 ]
 
 

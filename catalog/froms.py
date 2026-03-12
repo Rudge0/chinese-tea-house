@@ -54,3 +54,9 @@ class ProvinceForm(forms.ModelForm):
     class Meta:
         model = Province
         fields = "__all__"
+
+
+class TeaCategoryForm(forms.ModelForm):
+    class Meta:
+        model = TeaCategory
+        fields = "__all__"
