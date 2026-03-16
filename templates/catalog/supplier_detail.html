@@ -5,7 +5,7 @@
     {{ supplier }}
   </h1>
   <p>
-    Website: {{ supplier.supplier }}
+    Website: {{ supplier.website }}
   </p>
   {% if supplier.teas %}
     <h3>
@@ -34,7 +34,7 @@
             {{ tea.harvest_year }}
           </th>
           <th>
-            {{ tea.region }}
+            {{ tea.province }}
           </th>
         </tr>
       {% endfor %}
