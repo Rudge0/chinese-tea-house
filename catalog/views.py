@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
 
-from catalog.froms import (
+from catalog.forms import (
     TeaSearchForm,
     SupplierSearchForm,
     TeaForm,
@@ -77,7 +77,7 @@ class TeaCreateView(LoginRequiredMixin, generic.CreateView):
 
 class TeaUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Tea
-    fields = TeaForm
+    form_class = TeaForm
 
 
 class TeaDeleteView(LoginRequiredMixin, generic.DeleteView):
@@ -120,7 +120,7 @@ class SupplierCreateView(LoginRequiredMixin, generic.CreateView):
 
 class SupplierUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Supplier
-    form_class = SupplierCreationForm
+    fields = ("username", "first_name", "last_name", "website", "email")
 
 
 class SupplierDeleteView(LoginRequiredMixin, generic.DeleteView):
@@ -168,7 +168,7 @@ class TeaCategoryDetailView(LoginRequiredMixin, generic.DetailView):
 class TeaCategoryCreateView(LoginRequiredMixin, generic.CreateView):
     model = TeaCategory
     form_class = TeaCategoryForm
-    success_url = reverse_lazy("catalog:province-list")
+    success_url = reverse_lazy("catalog:tea-category-list")
     template_name = "catalog/tea_category_form.html"
 
 class TeaCategoryUpdateView(LoginRequiredMixin, generic.UpdateView):
