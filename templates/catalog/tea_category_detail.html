@@ -19,7 +19,7 @@
 
   {% if tea_category.teas %}
     <h3>
-      Teas from {{ tea_category }}:
+      {{ tea_category }} teas:
       <a href="{% url 'catalog:tea-category-create' %}" class="btn btn-success link-to-page">
         Create new tea category
       </a>

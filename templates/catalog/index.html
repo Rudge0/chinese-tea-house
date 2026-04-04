@@ -1,17 +1,54 @@
 {% extends "base.html" %}
-{% block title %}
-  <title>Home page</title>
-{% endblock %}
 
-{% block content %}
-  <h1>Home</h1>
-  <p>Welcome to the greatest tea house</p>
-  <h3>In out tea house you will see:</h3>
-  <ul>
-    <li>Teas: {{ num_teas }}</li>
-    <li>Suppliers: {{ num_supplier }}</li>
-    <li>Tea categories: {{ num_tea_category }}</li>
-    <li>Provinces: {{ num_provinces }}</li>
-  </ul>
-  <p>You have visited this page {{ num_visits }} time{{ num_visits|pluralize }}</p>
+{% block basic-content %}
+
+  <header class="header-2">
+    <div class="page-header min-vh-75 relative" style="background-image: url('{{ ASSETS_ROOT }}/img/bg2.jpg')">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-7 text-center mx-auto">
+            <h1 class="text-white pt-3 mt-n5">Welcome to our tea house</h1>
+            <p class="lead text-white mt-3">Discover the art of fine tea.<br/> Relax, sip, and enjoy the moment. </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <div class="card card-body blur shadow-blur mx-3 mx-md-4 mt-n6">
+    <section class="pt-3 pb-4" id="count-stats">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-9 mx-auto py-3">
+            <div class="row">
+              <div class="col-md-4 position-relative">
+                <div class="p-3 text-center">
+                  <h1 class="text-gradient text-primary"><span id="state1" countTo="{{ num_teas }}">0</span></h1>
+                  <h5 class="mt-3">Teas</h5>
+                  <p class="text-sm font-weight-normal">Explore a wide range of flavors, from classic blends to rare
+                    discoveries.</p>
+                </div>
+                <hr class="vertical dark">
+              </div>
+              <div class="col-md-4 position-relative">
+                <div class="p-3 text-center">
+                  <h1 class="text-gradient text-primary"><span id="state2" countTo="{{ num_supplier }}">0</span></h1>
+                  <h5 class="mt-3">Suppliers</h5>
+                  <p class="text-sm font-weight-normal">Partnering with artisans who keep the true spirit of Chinese tea
+                    culture alive.</p>
+                </div>
+                <hr class="vertical dark">
+              </div>
+              <div class="col-md-4">
+                <div class="p-3 text-center">
+                  <h1 class="text-gradient text-primary" id="state3" countTo="{{ num_provinces }}">0</h1>
+                  <h5 class="mt-3">Provinces</h5>
+                  <p class="text-sm font-weight-normal">A journey through China’s finest teas in every cup.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
 {% endblock %}

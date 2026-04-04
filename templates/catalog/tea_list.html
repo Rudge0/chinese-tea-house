@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 
-
+{% block title %} Tea list {% endblock %}
 {% load crispy_forms_tags %}
 {% block content %}
   <h1>
     Tea catalog
-    <a href="{% url 'catalog:tea-create' %}" class="btn btn-primary link-to-page">Create new tea</a>
+    <a href="{% url 'catalog:tea-create' %}" class="btn btn-success link-to-page">Create new tea</a>
   </h1>
   <form action="" method="get" class="form-inline">
     {{ search_form|crispy }}
@@ -18,6 +18,7 @@
         <th>Price</th>
         <th>Category</th>
         <th>Harvest year</th>
+        <th>Province</th>
       </tr>
       {% for tea in tea_list %}
         <tr>
@@ -39,9 +40,10 @@
         </tr>
       {% endfor %}
     </table>
+    {% include 'includes/pagination.html' %}
   {% else %}
     <p>
       There are no teas
     </p>
   {% endif %}
-{% endblock %}
+{% endblock content %}

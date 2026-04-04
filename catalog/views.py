@@ -44,7 +44,7 @@ def index(request: HttpRequest) -> HttpResponse:
 
 class TeaListView(LoginRequiredMixin, generic.ListView):
     model = Tea
-    paginate_by = 10
+    paginate_by = 5
 
     def get_context_data(
             self, *, object_list=..., **kwargs
@@ -87,7 +87,7 @@ class TeaDeleteView(LoginRequiredMixin, generic.DeleteView):
 
 class SupplierListView(LoginRequiredMixin, generic.ListView):
     model = Supplier
-    paginate_by = 10
+    paginate_by = 5
 
     def get_context_data(
             self, *, object_list=..., **kwargs
@@ -111,8 +111,7 @@ class SupplierListView(LoginRequiredMixin, generic.ListView):
 class SupplierDetailView(LoginRequiredMixin, generic.DetailView):
     model = Supplier
 
-
-class SupplierCreateView(LoginRequiredMixin, generic.CreateView):
+class SupplierCreateView(generic.CreateView):
     model = Supplier
     form_class = SupplierCreationForm
     success_url = reverse_lazy("catalog:supplier-list")
