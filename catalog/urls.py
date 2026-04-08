@@ -37,7 +37,7 @@ urlpatterns = [
     path("teas/create/", TeaCreateView.as_view(), name="tea-create"),
     path("teas/<int:pk>/", TeaDetailView.as_view(), name="tea-detail"),
     path("teas/<int:pk>/update/", TeaUpdateView.as_view(), name="tea-update"),
-    path("teas/<int:pk>/delete", TeaDeleteView.as_view(), name="tea-delete"),
+    path("teas/<int:pk>/delete/", TeaDeleteView.as_view(), name="tea-delete"),
 ####### Tea
 
 ####### Supplier
@@ -45,7 +45,7 @@ urlpatterns = [
     path("suppliers/create/", SupplierCreateView.as_view(), name="supplier-create"),
     path("suppliers/<int:pk>/", SupplierDetailView.as_view(), name="supplier-detail"),
     path("suppliers/<int:pk>/update/", SupplierUpdateView.as_view(), name="supplier-update"),
-    path("suppliers/<int:pk>/delete", SupplierDeleteView.as_view(), name="supplier-delete"),
+    path("suppliers/<int:pk>/delete/", SupplierDeleteView.as_view(), name="supplier-delete"),
 ####### Supplier
 
 ####### Province
@@ -53,7 +53,7 @@ urlpatterns = [
     path("provinces/create/", ProvinceCreateView.as_view(), name="province-create"),
     path("provinces/<int:pk>/", ProvinceDetailView.as_view(), name="province-detail"),
     path("provinces/<int:pk>/update/", ProvinceUpdateView.as_view(), name="province-update"),
-    path("provinces/<int:pk>/delete", ProvinceDeleteView.as_view(), name="province-delete"),
+    path("provinces/<int:pk>/delete/", ProvinceDeleteView.as_view(), name="province-delete"),
 ####### Province
 
 ####### Tea Category
@@ -61,7 +61,7 @@ urlpatterns = [
     path("tea-categories/create/", TeaCategoryCreateView.as_view(), name="tea-category-create"),
     path("tea-categories/<int:pk>/", TeaCategoryDetailView.as_view(), name="tea-category-detail"),
     path("tea-categories/<int:pk>/update/", TeaCategoryUpdateView.as_view(), name="tea-category-update"),
-    path("tea-categories/<int:pk>/delete", TeaCategoryDeleteView.as_view(), name="tea-category-delete"),
+    path("tea-categories/<int:pk>/delete/", TeaCategoryDeleteView.as_view(), name="tea-category-delete"),
 ####### Tea Category
 ]
 
