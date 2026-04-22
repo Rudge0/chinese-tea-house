@@ -1,5 +1,8 @@
 {% extends 'base.html' %}
 
+{% block navigation %}
+{% endblock %}
+
 {% load crispy_forms_tags %}
 {% block content %}
   <h1>{{ object|yesno:"Update,Create new" }} supplier</h1>
