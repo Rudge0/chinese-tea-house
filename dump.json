@@ -1,0 +1,141 @@
+[
+{
+    "model": "catalog.teacategory",
+    "pk": 1,
+    "fields": {
+        "name": "pu ehr",
+        "description": "Very tasty tea"
+    }
+},
+{
+    "model": "catalog.province",
+    "pk": 1,
+    "fields": {
+        "name": "Yunan"
+    }
+},
+{
+    "model": "catalog.province",
+    "pk": 2,
+    "fields": {
+        "name": "Taiwan"
+    }
+},
+{
+    "model": "catalog.supplier",
+    "pk": 1,
+    "fields": {
+        "password": "pbkdf2_sha256$1200000$sNPfp9fagy3DJMPkZEJYFo$oVr1GsCheS4rTaYdqgLNNC8mEZ2fcM/EKgIEMNTtxzM=",
+        "last_login": "2026-04-04T17:21:43.719Z",
+        "is_superuser": true,
+        "username": "admin",
+        "first_name": "Maksym",
+        "last_name": "Gerasym",
+        "email": "admin@admin.com",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2026-03-12T15:56:15Z",
+        "website": null,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "catalog.tea",
+    "pk": 1,
+    "fields": {
+        "name": "shu",
+        "price": "20.00",
+        "harvest_year": 2013,
+        "category": 1,
+        "province": 1,
+        "supplier": [
+            1
+        ]
+    }
+},
+{
+    "model": "catalog.tea",
+    "pk": 2,
+    "fields": {
+        "name": "shen",
+        "price": "132.00",
+        "harvest_year": 2014,
+        "category": 1,
+        "province": 1,
+        "supplier": [
+            1
+        ]
+    }
+},
+{
+    "model": "catalog.tea",
+    "pk": 3,
+    "fields": {
+        "name": "shennen",
+        "price": "0.01",
+        "harvest_year": 5,
+        "category": 1,
+        "province": 1,
+        "supplier": [
+            1
+        ]
+    }
+},
+{
+    "model": "catalog.tea",
+    "pk": 4,
+    "fields": {
+        "name": "fdsa",
+        "price": "1231.00",
+        "harvest_year": 2013,
+        "category": 1,
+        "province": 1,
+        "supplier": [
+            1
+        ]
+    }
+},
+{
+    "model": "catalog.tea",
+    "pk": 5,
+    "fields": {
+        "name": "fdsa",
+        "price": "123.00",
+        "harvest_year": 2012,
+        "category": 1,
+        "province": 1,
+        "supplier": [
+            1
+        ]
+    }
+},
+{
+    "model": "catalog.tea",
+    "pk": 6,
+    "fields": {
+        "name": "shinan",
+        "price": "13.00",
+        "harvest_year": 2021,
+        "category": 1,
+        "province": 1,
+        "supplier": [
+            1
+        ]
+    }
+},
+{
+    "model": "catalog.tea",
+    "pk": 7,
+    "fields": {
+        "name": "Seljfh;lasdkjf;al",
+        "price": "132.00",
+        "harvest_year": 2001,
+        "category": 1,
+        "province": 2,
+        "supplier": [
+            1
+        ]
+    }
+}
+]
