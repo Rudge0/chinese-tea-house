@@ -1,6 +1,6 @@
 from django.urls import path
 from catalog.views import ( \
-    index,
+    IndexView,
 
     TeaListView,
     TeaDetailView,
@@ -30,7 +30,7 @@ from catalog.views import ( \
 )
 
 urlpatterns = [
-    path("", index, name="index"),
+    path("", IndexView.as_view(), name="index"),
 
 ####### Tea
     path("teas/", TeaListView.as_view(), name="tea-list"),
